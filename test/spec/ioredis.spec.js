@@ -15,7 +15,7 @@ describe('Redis store', () => {
   it('Should accept custom HASH_KEY', async () => {
     const expected = 'customHash'
     store = new RedisStore(client, expected)
-    assert.equal(store.HASH_KEY, expected)
+    assert.strictEqual(store.HASH_KEY, expected)
   })
 
   it('getItem(): Should retrieve an item', async () => {
@@ -25,7 +25,7 @@ describe('Redis store', () => {
 
     const value = await store.getItem('foo')
 
-    assert.equal(value, expected)
+    assert.strictEqual(value, expected)
   })
 
   it('setItem(): Should set an item', async () => {
@@ -35,7 +35,7 @@ describe('Redis store', () => {
 
     const value = await store.getItem('foo')
 
-    assert.equal(value, expected)
+    assert.strictEqual(value, expected)
   })
 
   it('removeItem(): Should remove an item', async () => {
@@ -44,7 +44,7 @@ describe('Redis store', () => {
     await store.removeItem('foo')
 
     const value = await store.getItem('foo')
-    assert.equal(value, null)
+    assert.strictEqual(value, null)
   })
 
   it('clear(): Should clear all set values', async () => {
@@ -55,7 +55,7 @@ describe('Redis store', () => {
 
     const length = await store.length()
 
-    assert.equal(length, 0)
+    assert.strictEqual(length, 0)
   })
 
   it('Should serialize stored data to prevent modification by reference', async () => {
@@ -69,6 +69,6 @@ describe('Redis store', () => {
 
     const storedData = await store.getItem('key')
 
-    assert.notEqual(data.key, storedData.key)
+    assert.notStrictEqual(data.key, storedData.key)
   })
 })
